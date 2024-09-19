@@ -6,6 +6,7 @@ import Spacer from "./form/Spacer";
 import SubmitButton from "./form/SubmitButton";
 
 import { useFormik } from "formik";
+import Button from "./form/Button";
 
 interface FormValues {
   name: string;
@@ -21,7 +22,7 @@ type OptionalFormValues = Partial<FormValues>;
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
 const validate = (values: FormValues) => {
-  console.log("values", values.size);
+  console.log("values", values);
   const errors: OptionalFormValues = {};
   if (!values.name) {
     errors.name = "Required";
@@ -188,8 +189,10 @@ function VenteTeeShirt() {
 
         <Spacer />
 
-        <SubmitButton label="Rechercher" disabled={!formik.isValid} />
-        <button type="reset">Recommencer</button>
+        <section className="flex justify-center gap-2">
+          <SubmitButton label="Rechercher" disabled={!formik.isValid} />
+          <Button onClick={() => formik.resetForm()}>Recommencer</Button>
+        </section>
       </form>
     </>
   );
